@@ -2,6 +2,7 @@
 import VueRouter from 'vue-router'
 //引入组件
 import Login from '../components/Login.vue'
+import ShiPin from '@/view/Vedio/shipin.vue';
 import store from '../store'
 import { GetUserRoutersApi, GetMenuInfoApi, GetMenuInfoRawApi } from '@/request/api';
 
@@ -43,6 +44,11 @@ const routesData = [
 		name: 'login',
 		path: '/Login',
 		component: Login
+	},
+	{
+		name: 'shipin',
+		path: '/ShiPin',
+		component: ShiPin
 	},
 	{
 		path: "*",

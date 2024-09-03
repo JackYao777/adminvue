@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Message } from "element-ui";
 import router from "@/router";
-
+import Vue from "vue";
 const service = axios.create({
     baseURL: 'http://47.115.128.32:8027',
     timeout: 10000
@@ -49,4 +49,5 @@ service.interceptors.response.use(res => {
     return process.reject(err)
 })
 
+Vue.prototype.$axios = axios;
 export default service
