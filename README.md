@@ -23,7 +23,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### 第一天 
+### 总结
 1：创建项目 vue create name,   
 2: npm i element-ui  安装element, 按需引入
 3：login页面创建,然后引入router,npm i reset-css(去掉默认样式)
