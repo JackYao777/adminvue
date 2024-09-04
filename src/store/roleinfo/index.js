@@ -2,8 +2,8 @@ import { GetRoleInfoAllApi } from "@/request/api.js"
 export default {
     namespaced: true,
     state: {
-        // roleInfos: (await GetRoleInfoAllApi()).data,
-        roleInfos:[],
+         roleInfos: (await GetRoleInfoAllApi()).data,
+        // roleInfos:[],
     },
 
     mutations: {
