@@ -45,11 +45,11 @@ const routesData = [
 		path: '/Login',
 		component: Login
 	},
-	{
-		name: 'shipin',
-		path: '/ShiPin',
-		component: ShiPin
-	},
+	// {
+	// 	name: 'shipin',
+	// 	path: '/ShiPin',
+	// 	component: ShiPin
+	// },
 	{
 		path: "*",
 		component: () => import('@/view/404.vue'),

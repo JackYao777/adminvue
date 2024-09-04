@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="video-content">
     <danmaku :data="danmaku" :src="videoUrl" @send="sendDanmaku" :width="1200"></danmaku>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style>
-#app {
+#video-content {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
