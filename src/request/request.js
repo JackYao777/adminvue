@@ -3,7 +3,8 @@ import { Message } from "element-ui";
 import router from "@/router";
 import Vue from "vue";
 const service = axios.create({
-    baseURL: 'http://47.115.128.32:8027',
+    // baseURL: 'http://47.115.128.32:8027',
+    baseURL: 'http://127.0.0.1:8027',
     timeout: 10000
 })
 
