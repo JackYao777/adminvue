@@ -60,21 +60,23 @@
                 :close-on-click-modal="false" width="500px" :close-on-press-escape=false :destroy-on-close="true">
                 <div style="margin-bottom: 50px;">
                     文件类型：
-                    <el-select v-model="ruleForm.fileTypeCode" placeholder="请选择" style="width:200px;">
-                        <el-option v-for="item, index in fileTypeCodeDatas" :index="index" :label="item.fileTypeName"
-                            :value="item.fileTypeCode"></el-option>
+                    <el-select v-model="ruleForm.fileTypeCode" placeholder="请选择" style="width: 280px;">
+                        <el-option v-for="item in fileTypeCodeDatas" :key="item.key" :label="item.label" :value="item.value">
+                            <span style="float: left">{{ item.label }}</span>
+                            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.key }}</span>
+                        </el-option>
                     </el-select>
                 </div>
-                <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
-                        <i class="el-icon-upload"></i>
-                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-                    </el-upload>
+                <el-upload class="upload-demo" drag :action="uploadUrl" :before-upload="beforeUpload"
+                    :on-success="handleSuccess" :on-error="handleError" :file-list="fileList">
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
 
                 <div slot="footer" class="dialog-footer">
                     <el-button @click="changeIsShow">取 消</el-button>
-                    <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    <el-button type="primary" @click="submitUpload('ruleForm')">保存</el-button>
                 </div>
             </el-dialog>
         </div>
@@ -89,8 +91,9 @@
     </div>
 </template>
 <script>
-import { GetUserInfosList, GetFileInfoApi, UploadFileApi } from '@/request/api';
+import { GetUserInfosList, GetFileInfoApi, AddFileApi } from '@/request/api';
 import { fileTypeDatas } from '@/Utils/common.js'
+import { mapState } from 'vuex'
 
 export default {
     data() {
@@ -122,8 +125,12 @@ export default {
             fileTypeCodeDatas: fileTypeDatas,
             ruleForm: {
                 fileTypeCode: '',
-
             },
+            uploadUrl: 'http://47.115.128.32:8027/Admin/api/SysFile/Add', // 替换为你的上传API地址
+            filestream: null,
+            fileName: '',
+            fileList: [],
+            imageUrl: null
         }
     },
     methods: {
@@ -182,7 +189,55 @@ export default {
             this.dialogFormVisible = true;
         },
         changeIsShow() {
+            this.resetReForm();
             this.dialogFormVisible = false;
+        },
+
+        beforeUpload(file) {
+            this.fileList = [];
+            this.filestream = null;
+            this.filestream = file;
+            this.fileList.push({ name: file.name })
+            return false; // 阻止默认上传行为
+        },
+        async submitUpload() {
+            if (this.ruleForm.fileTypeCode == '' || this.filestream == null) {
+                this.$Message({
+                    message: '文件类型和文件都是必选项,请选择之后再进行提交',
+                    type: 'warning',
+                    duration: 3000
+                });
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('dirName', 'adminVue');
+            formData.append('attachFileType', this.ruleForm.fileTypeCode);
+            console.log('userInfo', this.userInfo);
+            formData.append('createId', this.userInfo.adminID);
+            // formData.append('useDate', false);
+            formData.append('FormFile', this.filestream);
+            let resdata = await AddFileApi(formData, { "Content-type": "multipart/form-data" })
+            console.log('resData', resdata)
+            if(!resdata.success) return;
+            // this.handleSuccess(resdata.data);
+            this.changeIsShow();
+            await this.isFreshData();
+        },
+        handleSuccess(response) {
+            // 处理上传成功的响应
+            console.log('Success:', response);
+            // this.imageUrl=MinIO_BASEURL+response.path;
+            console.log("地址", this.imageUrl)
+        },
+        handleError(error) {
+            // 处理上传失败的错误
+            console.error('Error:', error);
+        },
+        resetReForm() {
+            this.ruleForm.fileTypeCode = '';
+            this.fileList = [];
+            this.filestream = null;
         }
     },
     async created() {
@@ -191,6 +246,9 @@ export default {
     mounted() {
         console.log('这里挂在用户页面', this.$route)
         this.checkBtnPemission();
+    },
+    computed: {
+        ...mapState({ userInfo: state => state.userInfo.userInfo })
     }
 }
 </script>

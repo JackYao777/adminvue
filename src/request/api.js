@@ -34,6 +34,8 @@ export const GetUserRoutersApi = async (params) => service.get('/Admin/api/SysMe
 export const UploadFileApi=async(params,headers)=>service.post("/Admin/api/FileManager/UploadFile",params,headers)
 
 
+export const AddFileApi=async(params,headers)=>service.post("/Admin/api/SysFile/Add",params,headers)
+
 export const GetFileInfoApi=async(params)=> service.get('/Admin/api/SysFile/Get', { params: params });
 export function getToken() {};
   

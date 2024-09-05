@@ -10,16 +10,20 @@ export const enumDatas = {
 
 export const fileTypeDatas = [
    {
-      fileTypeCode: 'AppInfoLogo',
-      fileTypeName: '应用Logo'
+      key: 'AppInfoLogo',
+      label: '应用Logo',
+      value:0
    }, {
-      fileTypeCode: 'UserIcon',
-      fileTypeName: '用户图片'
+      key: 'UserIcon',
+      label: '用户图片',
+      value:1
    }, {
-      fileTypeCode: 'CountryIcon',
-      fileTypeName: '国家图标'
+      key: 'CountryIcon',
+      label: '国家图标',
+      value:2
    }, {
-      fileTypeCode: 'ExcelOrWorld',
-      fileTypeName: '文档文件'
+      key: 'ExcelOrWorld',
+      label: '文档文件',
+      value:3
    }
 ]
