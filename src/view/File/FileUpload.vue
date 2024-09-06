@@ -24,13 +24,24 @@
             </el-form>
         </div>
         <div class="file-bottom">
-            <el-button type="primary" icon="el-icon-plus" @click="upLoadFile">上传</el-button>
-            <el-button type="primary" icon="el-icon-edit">编辑</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="upLoadFile">上传</el-button>
+            <el-button type="warning" icon="el-icon-edit">删除</el-button>
             <el-table ref="multipleTable" :data="fileInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55">
                 </el-table-column>
                 <el-table-column label="id" prop="adminID" width="120" v-if='false'>
+                </el-table-column>
+                <el-table-column label="文件">
+                    <template slot-scope="scope">
+                        <div v-viewer class="picImg" @mouseover="isShowEyes(true, scope.row.id)"
+                            @mouseleave="isShowEyes(false, 0)">
+                            <img :src="MinIO_BASEURL + scope.row.filePath" class="avatar" />
+                            <div class="picImg-icon" style="color: white;" v-if="showTip && scope.row.id == currentId">
+                                <i class="el-icon-view">预览</i>
+                            </div>
+                        </div>
+                    </template>
                 </el-table-column>
                 <el-table-column label="文件名称" prop="fileName">
                 </el-table-column>
@@ -50,9 +61,12 @@
                 </el-table-column>
                 <el-table-column label="上传人" prop="createName">
                 </el-table-column>
-                <!-- <el-table-column label="修改" align="center">
-                    <template slot-scope="scope"><i class='el-icon-edit'>修改</i></template>
-                </el-table-column> -->
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" class='el-icon-download'
+                            @click="downloadFile(scope.row)">下载</el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
         <div class="file-box">
@@ -61,7 +75,8 @@
                 <div style="margin-bottom: 50px;">
                     文件类型：
                     <el-select v-model="ruleForm.fileTypeCode" placeholder="请选择" style="width: 280px;">
-                        <el-option v-for="item in fileTypeCodeDatas" :key="item.key" :label="item.label" :value="item.value">
+                        <el-option v-for="item in fileTypeCodeDatas" :key="item.key" :label="item.label"
+                            :value="item.value">
                             <span style="float: left">{{ item.label }}</span>
                             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.key }}</span>
                         </el-option>
@@ -94,10 +109,14 @@
 import { GetUserInfosList, GetFileInfoApi, AddFileApi } from '@/request/api';
 import { fileTypeDatas } from '@/Utils/common.js'
 import { mapState } from 'vuex'
+import { MinIO_BASEURL } from '@/Utils/baseurl';
 
 export default {
     data() {
         return {
+            currentId: 0,
+            showTip: false,
+            MinIO_BASEURL: MinIO_BASEURL,
             btnDatas: [{
                 btnName: '搜索',
                 isSHow: false,
@@ -134,6 +153,18 @@ export default {
         }
     },
     methods: {
+        downloadFile(row) {
+            // let link = document.createElement('a');
+            // link.style.display = 'none';
+            // link.href = this.MinIO_BASEURL + row.filePath;
+            // document.body.appendChild(link);
+            // link.click();
+            window.location.href = this.MinIO_BASEURL + row.filePath;
+        },
+        isShowEyes(obj, currentId) {
+            this.showTip = obj;
+            this.currentId = currentId;
+        },
         handleSizeChange(val) {
             this.pageSize = val;
             this.isFreshData();
@@ -219,7 +250,7 @@ export default {
             formData.append('FormFile', this.filestream);
             let resdata = await AddFileApi(formData, { "Content-type": "multipart/form-data" })
             console.log('resData', resdata)
-            if(!resdata.success) return;
+            if (!resdata.success) return;
             // this.handleSuccess(resdata.data);
             this.changeIsShow();
             await this.isFreshData();
@@ -252,8 +283,32 @@ export default {
     }
 }
 </script>
-<style lang="less">
+<style scoped lang="less">
 .file-bottom {
     margin-top: 50px;
+}
+
+.picImg {
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
+    }
+
+    .avatar:hover {
+        filter: brightness(50%);
+        transition: filter 0.3s ease;
+    }
+
+    .picImg-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 </style>

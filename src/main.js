@@ -22,6 +22,8 @@ import "@/icons/index.js"
 import '@/Utils/icons.js'
 import '@/plugins/datav.js'
 import VCharts from 'v-charts'
+import Viewer from './plugins/viewer.js'
+
 Vue.use(VCharts)
 
 

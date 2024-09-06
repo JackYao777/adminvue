@@ -48,7 +48,7 @@
                 <el-button @click="changeIsShow">取 消</el-button>
                 <!-- <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button> -->
                 <el-button type="primary" @click="submitForm('ruleForm')" v-if="dialogTitle == '修改用户数据'">保存</el-button>
-                <el-button type="primary" @click="submitForm('ruleForm')" v-else>创建</el-button>
+                <el-button type="success" @click="submitForm('ruleForm')" v-else>创建</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
             </div>
         </el-dialog>

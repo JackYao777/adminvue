@@ -26,6 +26,7 @@ service.interceptors.response.use(res => {
 
         if (resData.code == 401) // 授权未通过或者token过期
         {
+            console.log('这里是401错误')
             localStorage.removeItem('edb-authorization-token')
             router.push('/Login')
         }
@@ -42,12 +43,14 @@ service.interceptors.response.use(res => {
 
 }, err => {
     if (err.response.status == 401) {
+        console.log('这里是401错误Le')
         Message.warning('状态未授权或已过期,请重新登录');
         localStorage.removeItem('edb-authorization-token')
         localStorage.removeItem('edb-userInfo')
         router.push('/Login')
+        console.log('这里是出了401错误Le')
     }
-    return process.reject(err)
+    return Promise.reject(err)
 })
 
 Vue.prototype.$axios = axios;

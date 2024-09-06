@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="buttom-top">
-            <el-button type="primary" icon="el-icon-plus" @click="addMenu">添加</el-button>
-            <el-button type="primary" @click="isFreshData">刷新</el-button>
-            <el-button type="primary" @click="setIsExpand">{{ isExpand ? '全部折叠' : '全部展开' }}</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="addMenu">添加</el-button>
+            <el-button type="info" @click="isFreshData">刷新</el-button>
+            <el-button type="warning" @click="setIsExpand">{{ isExpand ? '全部折叠' : '全部展开' }}</el-button>
             <el-table ref="tableData" :data="menuInfos" style="width: 100%;margin-bottom: 20px;" row-key="menuID" border
                 default-expand-all :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
                 <el-table-column label="索引" type="index" width="60">

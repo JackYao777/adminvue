@@ -13,8 +13,8 @@
             </el-form>
         </div>
         <div class="bottom-box">
-            <el-button type="primary" icon="el-icon-plus" @click="addRole">添加</el-button>
-            <el-button type="primary" icon="el-icon-edit" @click="editRole">编辑</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="addRole">添加</el-button>
+            <el-button type="warning" icon="el-icon-edit" @click="editRole">编辑</el-button>
             <el-table ref="multipleTable" :data="roleInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange" :fit="true" border>
                 <el-table-column type="selection" width="55">

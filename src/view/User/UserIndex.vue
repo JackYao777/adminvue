@@ -28,9 +28,9 @@
             </el-form>
         </div>
         <div class="user-bottom">
-            <el-button type="primary" icon="el-icon-plus" @click="addUser" v-if="btnDatas[1].isSHow">{{ btnDatas[1].btnName }}</el-button>
-            <el-button type="primary" icon="el-icon-edit" @click="editUser" v-if="btnDatas[2].isSHow">{{ btnDatas[2].btnName }}</el-button>
-            <el-button type="primary" @click="initPassWord" v-if="btnDatas[3].isSHow">{{ btnDatas[3].btnName }}</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="addUser" v-if="btnDatas[1].isSHow">{{ btnDatas[1].btnName }}</el-button>
+            <el-button type="info" icon="el-icon-edit" @click="editUser" v-if="btnDatas[2].isSHow">{{ btnDatas[2].btnName }}</el-button>
+            <el-button type="warning" @click="initPassWord" v-if="btnDatas[3].isSHow">{{ btnDatas[3].btnName }}</el-button>
             <el-table ref="multipleTable" :data="userInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55">

@@ -151,10 +151,12 @@ router.beforeEach(async (to, from, next) => {
 	}
 
 	if(token){
+		console.log('token',token)
 		//发现菜单长度为0那就去请求菜单数据
-	// console.log('存储的menudata', store.state.menuDatas.menuData)
+	//  console.log('存储的menudata', store.state.menuDatas.menuData)
 	if (token && store.state.menuDatas.menuData.length == 0) {
-		let res = await GetMenuInfoApi();//树形结构
+		let res = await GetMenuInfoApi().catch(err=>console.log(err));//树形结构
+		// .catch(err=>{console.log(err)});
 		let resRaw = await GetMenuInfoRawApi();//非树形结构
 		console.log('store.state.userInfo.userInfo.adminID', store.state.userInfo.userInfo.adminID)
 		let routerDatas = await GetUserRoutersApi({ adminId: store.state.userInfo.userInfo.adminID })
