@@ -35,7 +35,7 @@
                         <el-button type="text" class='el-icon-edit'
                             @click="openDialog('编辑字典数据', scope.row)">编辑</el-button>
                         <el-button type="text" class='el-icon-delete' style="color: red;"
-                            @click="">删除</el-button>
+                            @click="deleteDicData(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -108,7 +108,7 @@
     </div>
 </template>
 <script>
-import { AddDictionaryApi, UpdateDictionaryApi, getDictionaryApi, AddDictionaryDetailApi, getDictionaryDetailApi } from '@/request/dictionary';
+import { addDictionaryApi, updateDictionaryApi, getDictionaryApi, addDictionaryDetailApi, getDictionaryDetailApi, removeDicData } from '@/request/dictionary';
 import { mapState } from 'vuex'
 
 export default {
@@ -136,6 +136,7 @@ export default {
             dialogData: {
                 dialogTitle: '',
                 dialogFormVisible: false,
+                dialogDeleteVisible: false,
                 dialogFormVisibleDetail: false,
                 ruleForm: {
                     dicTypeCode: '',
@@ -182,6 +183,25 @@ export default {
         }
     },
     methods: {
+        async deleteDicData(row) {
+            this.$msgBox.confirm('此操作将永久删除该条数据, 是否继续11?', '提示', {
+                cancelButtonText: '取消',
+                confirmButtonText: '确定',
+                type: 'warning'
+            }).then(async () => {
+                await removeDicData(row.dicTypeCode);
+                this.$Message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+                await this.isFreshData();
+            }).catch(() => {
+                this.$Message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
+        },
         async submitFormDetail(formName) {
             let checkPass = true;
             this.$refs[formName].forEach(x => {
@@ -195,7 +215,7 @@ export default {
                 });
             });
             if (!checkPass) return;
-            let resData = await AddDictionaryDetailApi({
+            let resData = await addDictionaryDetailApi({
                 DetailDataRequests: this.dialogData.ruleFormDetail
             });;
             if (!resData) return;
@@ -256,9 +276,9 @@ export default {
                 if (valid) {
                     let resData;
                     if (this.dialogData.dialogTitle === '编辑字典数据')
-                        resData = await UpdateDictionaryApi(this.dialogData.ruleForm);
+                        resData = await updateDictionaryApi(this.dialogData.ruleForm);
                     else
-                        resData = await AddDictionaryApi(this.dialogData.ruleForm);
+                        resData = await addDictionaryApi(this.dialogData.ruleForm);
                     if (!resData) return;
                     this.$Message({
                         message: '操作成功',
@@ -275,9 +295,10 @@ export default {
             });
         },
         resetForm(formName, isOpen) {
+            this.dialogData.dialogFormVisible = isOpen;
             console.log(this.$refs[formName])
             this.$refs[formName].resetFields();
-            this.dialogData.dialogFormVisible = isOpen;
+            this.dialogData.ruleForm = {};
         },
         async changeIsShowDetail(isShow, currentDicTypeCode) {
             if (currentDicTypeCode) {
