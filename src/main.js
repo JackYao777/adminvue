@@ -23,6 +23,7 @@ import '@/Utils/icons.js'
 import '@/plugins/datav.js'
 import VCharts from 'v-charts'
 import Viewer from './plugins/viewer.js'
+import {btnPermissionPlugin} from '@/directives/btnPemission.js'
 
 Vue.use(VCharts)
 
@@ -33,6 +34,8 @@ Vue.use(VueRouter)
 Vue.use(VueSvgIcon,{
   tagName:'svg-icon'
 })
+
+Vue.use(btnPermissionPlugin)
 //全部引用
 //  Vue.use(ElementUI)
 // Vue.component(Button.name,Button);

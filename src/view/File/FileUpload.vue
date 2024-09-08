@@ -19,13 +19,13 @@
                     </el-select>
                 </el-form-item> -->
                 <el-form-item>
-                    <el-button type="primary" @click="serach">{{ btnDatas[0].btnName }}</el-button>
+                    <el-button type="primary" v-permission="btnInfos[0]" @click="serach">搜索</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <div class="file-bottom">
-            <el-button type="success" icon="el-icon-plus" @click="upLoadFile">上传</el-button>
-            <el-button type="warning" icon="el-icon-edit">删除</el-button>
+            <el-button type="success" icon="el-icon-plus" v-permission="btnInfos[1]" @click="upLoadFile">上传</el-button>
+            <el-button type="warning" v-permission="btnInfos[2]" icon="el-icon-edit">删除</el-button>
             <el-table ref="multipleTable" :data="fileInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55">
@@ -63,7 +63,7 @@
                 </el-table-column>
                 <el-table-column label="操作" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" class='el-icon-download'
+                        <el-button type="text" v-permission="btnInfos[3]" class='el-icon-download'
                             @click="downloadFile(scope.row)">下载</el-button>
                     </template>
                 </el-table-column>
@@ -117,19 +117,12 @@ export default {
             currentId: 0,
             showTip: false,
             MinIO_BASEURL: MinIO_BASEURL,
-            btnDatas: [{
-                btnName: '搜索',
-                isSHow: false,
-            }, {
-                btnName: '添加',
-                isSHow: false,
-            }, {
-                btnName: '编辑',
-                isSHow: false,
-            }, {
-                btnName: '重置密码',
-                isSHow: false,
-            }],
+            btnInfos: [
+                '搜索' ,
+                '上传' ,
+                '删除',
+                '下载'
+            ],
             dialogTitle: '上传文件',
             dialogFormVisible: false,
             pageIndex: 1,
@@ -276,7 +269,7 @@ export default {
     },
     mounted() {
         console.log('这里挂在用户页面', this.$route)
-        this.checkBtnPemission();
+        // this.checkBtnPemission();
     },
     computed: {
         ...mapState({ userInfo: state => state.userInfo.userInfo })

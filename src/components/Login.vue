@@ -74,6 +74,7 @@ export default {
     methods: {
         //借助mapMutations生成对应的方法，方法中会调用commit去联系mutations(对象写法)
         ...mapMutations({ changeMenuData: "menuDatas/changeMenuData" }),
+        ...mapMutations({ changeButtonsInfo: "btninfos/changeButtonsInfo" }),
         ...mapActions({ asyncChangeUserInfo: 'userInfo/asyncChangeUserInfo' }),
         ...mapActions({ asyncChangeRoleInfos: 'roleInfos/asyncChangeRoleInfos' }),
         //     validateUsername(rule, value, callback){
@@ -106,6 +107,7 @@ export default {
 
                         await this.asyncChangeUserInfo({ adminId: res.data.loginUserId });
                         await this.asyncChangeRoleInfos({});
+                        this.changeButtonsInfo();
                         // 跳转首页
                         await this.$router.push('/');
 

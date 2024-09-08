@@ -7,14 +7,13 @@
                     <el-input v-model="roleInfoQuery.roleName" placeholder="角色名称" @click=""></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="search">查询</el-button>
+                    <el-button type="primary" v-permission="btnInfos[0]" @click="search">搜索</el-button>
                 </el-form-item>
-
             </el-form>
         </div>
         <div class="bottom-box">
-            <el-button type="success" icon="el-icon-plus" @click="addRole">添加</el-button>
-            <el-button type="warning" icon="el-icon-edit" @click="editRole">编辑</el-button>
+            <el-button type="success" icon="el-icon-plus" v-permission="btnInfos[1]" @click="addRole">添加</el-button>
+            <el-button type="warning" icon="el-icon-edit" v-permission="btnInfos[2]" @click="editRole">编辑</el-button>
             <el-table ref="multipleTable" :data="roleInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange" :fit="true" border>
                 <el-table-column type="selection" width="55">
@@ -42,7 +41,7 @@
                     <template slot-scope="scope">
                         <!-- <el-button type="text" size="small"
                             @click="handleEditRoleName(scope.$index, scope.row)">修改角色名</el-button> -->
-                        <el-button type="text" @click="handlePower(scope.$index, scope.row)">授权</el-button>
+                        <el-button type="text" v-permission="btnInfos[3]" @click="handlePower(scope.$index, scope.row)">授权</el-button>
                         <!-- <el-button type="text" size="small"
                             @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
                     </template>
@@ -111,6 +110,12 @@ export default {
 
     data() {
         return {
+            btnInfos:[
+                "搜索",
+                "添加",
+                "编辑",
+                "授权"
+            ],
             handlerRole: {},
             treePowerData: [],
             treeNodeData: [],

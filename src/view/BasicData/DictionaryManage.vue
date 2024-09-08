@@ -7,12 +7,12 @@
                     <el-input v-model="dicInfoQuery.KeyWords" placeholder="字典名称/字典code"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="serach">{{ btnDatas[0].btnName }}</el-button>
+                    <el-button type="primary" v-permission="btnInfos[0]" @click="serach">搜索</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <div class="dic-bottom">
-            <el-button type="success" icon="el-icon-plus" @click="openDialog('添加字典数据')">添加</el-button>
+            <el-button type="success" icon="el-icon-plus" v-permission="btnInfos[1]" @click="openDialog('添加字典数据')">添加</el-button>
             <el-table ref="multipleTable" :data="tableData.dicInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange">
                 <!-- <el-table-column type="selection" width="55">
@@ -30,11 +30,11 @@
 
                 <el-table-column label="操作" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" class='el-icon-edit'
+                        <el-button type="text" class='el-icon-edit' v-permission="btnInfos[2]"
                             @click="changeIsShowDetail(true, scope.row.dicTypeCode)">字典详情</el-button>
-                        <el-button type="text" class='el-icon-edit'
+                        <el-button type="text" class='el-icon-edit' v-permission="btnInfos[3]"
                             @click="openDialog('编辑字典数据', scope.row)">编辑</el-button>
-                        <el-button type="text" class='el-icon-delete' style="color: red;"
+                        <el-button type="text" class='el-icon-delete' style="color: red;" v-permission="btnInfos[4]"
                             @click="deleteDicData(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -114,16 +114,13 @@ import { mapState } from 'vuex'
 export default {
     data() {
         return {
-            btnDatas: [{
-                btnName: '搜索',
-                isSHow: false,
-            }, {
-                btnName: '添加',
-                isSHow: false,
-            }, {
-                btnName: '编辑',
-                isSHow: false,
-            }],
+            btnInfos: [
+                '搜索' ,
+                '添加' ,
+                '字典详情' ,
+                '编辑',
+                '删除'
+            ],
             tableData: {
                 dicInfos: []
             },
@@ -388,8 +385,8 @@ export default {
         await this.isFreshData();
     },
     mounted() {
-        console.log('这里挂在用户页面', this.$route)
-        this.checkBtnPemission();
+        // console.log('这里挂在用户页面', this.$route)
+        // this.checkBtnPemission();
     },
     computed: {
         ...mapState({ userInfo: state => state.userInfo.userInfo })

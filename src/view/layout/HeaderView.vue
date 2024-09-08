@@ -17,6 +17,7 @@
                 <!-- <img :src="IMG_BASEURL+userInfo.user.img" :alt="userInfo.user.name" width="40"> -->
                 <el-dropdown @command="hdcommand">
                  <div class="avatar-box" style="display: inline-block;">
+                    
                     <img src="../../assets/logo.png" alt="" width="40">
                     <i class="el-icon-caret-bottom">signOut</i>
                  </div>
@@ -63,6 +64,7 @@ export default {
                 //清除token，清除用户信息
                 localStorage.removeItem('edb-authorization-token');
                 localStorage.removeItem('edb-userInfo');
+                localStorage.removeItem('edb-btnInfos');
                 localStorage.removeItem('ebd-capt-uuid');
                 location.reload();
                 // this.$router.push('/Login');

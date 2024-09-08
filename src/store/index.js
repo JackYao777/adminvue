@@ -8,6 +8,7 @@ import menuDataOption from './userMenuData'
 import userinfoOption from './userinfo/index'
 import tagMenuOption from './tag/index'
 import roleinfoOption from './roleinfo'
+import btninfoOption from './btninfo'
 
 //应用Vuex插件
 Vue.use(Vuex)
@@ -34,6 +35,7 @@ export default new Vuex.Store({
         menuDatas: menuDataOption,
         userInfo: userinfoOption,
         tagMenuData: tagMenuOption,
-        roleInfos: roleinfoOption
+        roleInfos: roleinfoOption,
+        btninfos: btninfoOption
     }
 })

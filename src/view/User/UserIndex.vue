@@ -23,14 +23,14 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="serach" v-if="btnDatas[0].isSHow">{{ btnDatas[0].btnName }}</el-button>
+                    <el-button type="primary" @click="serach" v-permission="btnDatas[0].btnName">{{ btnDatas[0].btnName }}</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <div class="user-bottom">
-            <el-button type="success" icon="el-icon-plus" @click="addUser" v-if="btnDatas[1].isSHow">{{ btnDatas[1].btnName }}</el-button>
-            <el-button type="info" icon="el-icon-edit" @click="editUser" v-if="btnDatas[2].isSHow">{{ btnDatas[2].btnName }}</el-button>
-            <el-button type="warning" @click="initPassWord" v-if="btnDatas[3].isSHow">{{ btnDatas[3].btnName }}</el-button>
+            <el-button type="success" icon="el-icon-plus" @click="addUser" v-permission="btnDatas[1].isSHow">{{ btnDatas[1].btnName }}</el-button>
+            <el-button type="info" icon="el-icon-edit" @click="editUser" v-permission="btnDatas[2].isSHow">{{ btnDatas[2].btnName }}</el-button>
+            <el-button type="warning" @click="initPassWord" v-permission="btnDatas[3].isSHow">{{ btnDatas[3].btnName }}</el-button>
             <el-table ref="multipleTable" :data="userInfos" tooltip-effect="dark" style="width: 100%"
                 @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55">
@@ -217,7 +217,7 @@ export default {
     },
     mounted() {
         console.log('这里挂在用户页面', this.$route)
-        this.checkBtnPemission();
+        // this.checkBtnPemission();
     }
 }
 </script>

@@ -232,12 +232,10 @@ export default {
             }
         },
         handleEdit(index, row) {
-            console.log('编辑', row)
             this.dialogTitle = '编辑';
             this.menuInfo = JSON.parse(JSON.stringify(row));
             this.dialogMenuVisible = !this.dialogMenuVisible;
             var resData = this.rawMenuData.filter(x => x.menuID ==row.parentID);
-            console.log('这里mm', resData, this.menuInfo)
             if (resData.length <= 0) {
                 this.menuInfo.parentText = '顶级';
             }
@@ -247,7 +245,6 @@ export default {
                 this.isShowCatalogueRadio=false;
                 this.isShowMenuRadio=false;
             }
-            // this.isShowRadioContent(row.menuType);
         },
         addMenu() {
             this.dialogTitle = '新增';
@@ -328,7 +325,7 @@ export default {
                       this.changeMenuData([]);
                       this.asyncinitalRawMenuData(false);
                     //  console.log('这里清空数据menuData',this.menuData)
-                     this.$router.push('/');
+                    //  this.$router.push('/');
 
                 } else {
                     console.log('请填写正确信息在提交数据!!');
