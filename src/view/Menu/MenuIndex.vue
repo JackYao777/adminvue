@@ -325,7 +325,7 @@ export default {
                       this.changeMenuData([]);
                       this.asyncinitalRawMenuData(false);
                     //  console.log('这里清空数据menuData',this.menuData)
-                    //  this.$router.push('/');
+                     this.$router.push('/');
 
                 } else {
                     console.log('请填写正确信息在提交数据!!');
