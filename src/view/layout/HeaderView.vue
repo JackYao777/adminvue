@@ -11,17 +11,24 @@
                 <Crumb></Crumb>
             </div>
 
-            <div class="fr">
-                <div class="avatar-box">
-                    <img v-viewer src="../../assets/logo.png" alt="" width="40">
-                    <span> {{ userInfo.loginName }}</span>
-                    <el-dropdown @command="hdcommand">
-                        <i class="el-icon-arrow-down" style="cursor: pointer;"></i>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="profile">个人中心</el-dropdown-item>
-                            <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
+            <div style="float: right;">
+                <div class="btn-icon" @click="setFullScreen">
+                    <el-tooltip effect="dark" content="全屏" placement="bottom">
+                        <i class="el-icon-full-screen"></i>
+                    </el-tooltip>
+                </div>
+                <div class="fr">
+                    <div class="avatar-box">
+                        <img v-viewer src="../../assets/logo.png" alt="" width="40">
+                        <span> {{ userInfo.loginName }}</span>
+                        <el-dropdown @command="hdcommand">
+                            <i class="el-icon-arrow-down" style="cursor: pointer;"></i>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item command="profile">个人中心</el-dropdown-item>
+                                <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,6 +53,14 @@ export default {
         }
     },
     methods: {
+        setFullScreen() {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.body.requestFullscreen.call(document.body);
+                // console.log(document.getElementsByClassName('fullscreen')='red')
+            }
+        },
         ...mapMutations({
             changeIsColapse: 'navCollapse/changeIsCollapse'
         }),
@@ -77,8 +92,8 @@ export default {
 <style lang="less" scoped>
 .header {
     height: 84px;
+    background-color: white;
     box-shadow: 0px 5px 5px #ddd;
-
     button {
         width: 50px;
         height: 50px;
@@ -95,15 +110,18 @@ export default {
 
     .avatar-box {
         padding: 5px 20px 0 0;
+
         span {
             margin: 0 6px;
             color: #758eb5;
         }
+
         img {
             border-radius: 5px;
             vertical-align: middle;
             cursor: pointer;
         }
+
     }
 
     .fl {
@@ -114,6 +132,16 @@ export default {
     .fr {
         height: 47px;
         float: right;
+    }
+
+    .btn-icon {
+        float: left;
+        position: relative;
+        line-height: 50px;
+        cursor: pointer;
+        margin: 0 5px;
+        font-size: 20px;
+        margin-right: 20px;
     }
 }
 </style>

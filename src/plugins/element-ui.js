@@ -1,6 +1,6 @@
 import Vue from "vue"
 // import ElementUI from 'element-ui';
-import { Button,Row,DatePicker,Form,FormItem,Input,Message,MessageBox,Menu,MenuItem,MenuItemGroup,Submenu,Breadcrumb,BreadcrumbItem,Dropdown,DropdownItem,DropdownMenu,Tag,Table,TableColumn,Select,Option,Switch,Dialog,Pagination,Radio,Popover,Tree,Col,Upload,Card,TabPane,Carousel,CarouselItem,Timeline,TimelineItem,Tabs,Progress,Slider} from 'element-ui'; //按需引用
+import { Button,Row,DatePicker,Form,FormItem,Input,Message,MessageBox,Menu,MenuItem,MenuItemGroup,Submenu,Breadcrumb,BreadcrumbItem,Dropdown,DropdownItem,DropdownMenu,Tag,Table,TableColumn,Select,Option,Switch,Dialog,Pagination,Radio,Popover,Tree,Col,Upload,Card,TabPane,Carousel,CarouselItem,Timeline,TimelineItem,Tabs,Progress,Slider,Tooltip} from 'element-ui'; //按需引用
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(Button)
@@ -41,6 +41,7 @@ Vue.use(TimelineItem)
 Vue.use(Tabs)
 Vue.use(Progress)
 Vue.use(Slider)
+Vue.use(Tooltip)
 // Vue.use(Message)
 // Vue.use(MessageBox)
 Vue.prototype.$Message=Message;

@@ -82,6 +82,7 @@ export default {
     display: flex;
 
     .dataMM {
+        height: 100%;
         flex: 1;
         background-image: url('../../assets/bbimg.png');
     }
