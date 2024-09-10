@@ -21,5 +21,13 @@ module.exports={
         // changeOrigin: true //用于控制请求头中的host值
       }
     }
-  }
+  },
+  // plugins:
+  //   [
+  //     "component",
+  //     {
+  //       "libraryName": "element-ui",
+  //       "styleLibraryName": "~theme"
+  //     }
+  //   ]
 }

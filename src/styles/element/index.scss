@@ -1,0 +1,49 @@
+// /* src/styles/element-variables.scss */
+
+// /* 改变主题色变量 */
+// $--color-primary:'';
+// $--color-success:'';
+// $--color-danger:'';
+// $--color-info:orange;
+// $--color-warning:'';
+// $--color-success-light-8:'';
+
+
+
+// /* 改变 icon 字体路径变量，必需 */
+// $--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+// @import "~element-ui/packages/theme-chalk/src/index";
+
+// /* 如遇到导出的变量值为 undefined 则本文件名需要改成 element-variables.module.scss */
+// :export {
+//   theme:$--color-primary
+
+// }
+// // :root {
+// //     .el-button--primary {
+// //       color: #fff;
+// //       background-color: var(--el-color-primary);
+// //       border-color:var(--el-color-primary); ;
+// //     }
+// //     .el-button--success {
+// //       color: #fff;
+// //       background-color: var(--el-color-success);
+// //       border-color:var(--el-color-success); ;
+// //     }
+// //     .el-button--info {
+// //       color: #fff;
+// //       background-color: var(--el-color-info);
+// //       border-color:var(--el-color-info); ;
+// //     }
+// //     .el-button--danger {
+// //       color: #fff;
+// //       background-color: var(--el-color-danger);
+// //       border-color:var(--el-color-danger); ;
+// //     }
+// //     .el-button--warning {
+// //       color: #fff;
+// //       background-color: var(--el-color-warning);
+// //       border-color:var(--el-color-warning); ;
+// //     }
+// // }
