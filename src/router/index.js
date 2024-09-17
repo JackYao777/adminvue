@@ -243,7 +243,7 @@ router.beforeEach(async (to, from, next) => {
 
 				newChildrenRouters = [...newChildrenRouters, ...ret];
 			});
-			// console.log('路由数据', newChildrenRouters)
+			console.log('路由数据', newChildrenRouters)
 
 			newChildrenRouters.forEach(item => {
 				router.addRoute('mainlayout', item);

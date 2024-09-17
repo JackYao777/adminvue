@@ -23,8 +23,8 @@ export default {
     }),
   },
   created() {
-    console.log('this.initTheme', store)
-    this.initTheme();
+    // console.log('this.initTheme', store)
+    // this.initTheme();
   }
 }
 </script>
