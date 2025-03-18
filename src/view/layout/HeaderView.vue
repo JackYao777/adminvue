@@ -12,6 +12,14 @@
             </div>
 
             <div style="float: right;">
+                <div class="fl" style="height:50px;line-height: 50px;">
+                    <!-- <a href="http://47.115.128.32:8099/" target="_blank" style="margin-right: 20px;">影片管理</a>
+                    <a href="http://47.115.128.32:82/" target="_blank" style="margin-right: 20px;">电商管理</a>
+                    <a href="http://47.115.128.32:8090/" target="_blank">博客管理</a> -->
+                    <a href="https://movies.zhiweiadmin.top/" target="_blank" style="margin-right: 20px;">影片管理</a>
+                    <a href="https://shop.zhiweiadmin.top/" target="_blank" style="margin-right: 20px;">电商管理</a>
+                    <a href="https://blog.zhiweiadmin.top/" target="_blank">博客管理</a>
+                </div>
                 <div class="btn-icon" @click="setFullScreen">
                     <el-tooltip effect="dark" content="全屏" placement="bottom">
                         <i class="el-icon-full-screen"></i>
@@ -24,7 +32,7 @@
                         <el-dropdown @command="hdcommand">
                             <i class="el-icon-arrow-down" style="cursor: pointer;"></i>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item command="profile">个人中心</el-dropdown-item>
+                                <el-dropdown-item command="">个人中心</el-dropdown-item>
                                 <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -94,6 +102,7 @@ export default {
     height: 84px;
     background-color: white;
     box-shadow: 0px 5px 5px #ddd;
+
     button {
         width: 50px;
         height: 50px;

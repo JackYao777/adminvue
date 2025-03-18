@@ -43,6 +43,7 @@ export default {
     name: "Login",
     data() {
         return {
+        isLoading:false,
             ruleForm: {
                 username: '张三',
                 password: '123456',
@@ -88,6 +89,8 @@ export default {
         //   },
 
         async createLogin() {
+            if(this.isLoading) return;
+            this.isLoading=true;
             this.ruleForm.username = document.getElementById('userName').value;
             this.ruleForm.password = document.getElementById('password').value;
             this.ruleForm.captchcode = document.getElementById('captchcode').value;
@@ -113,8 +116,10 @@ export default {
                         this.changeButtonsInfo();
                         // 跳转首页
                         await this.$router.push('/');
-
-
+                        
+                       setTimeout(() => {
+                        this.isLoading=false;
+                       },2000);
                     }
                 });
         },
@@ -144,7 +149,7 @@ export default {
         },
         blurring() {
             this.load++
-            console.log(this.load)
+            // console.log(this.load)
             if (this.load > 99) {
                 clearInterval(this.currentInt)
             }
@@ -174,7 +179,7 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: steelblue;
+    background-color: transparent;
     z-index: -1;
     overflow: hidden;
 
