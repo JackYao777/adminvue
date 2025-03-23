@@ -96,8 +96,12 @@ export default {
             this.ruleForm.captchcode = document.getElementById('captchcode').value;
             await LoginApi({ UserName: this.ruleForm.username, Captcha: this.ruleForm.captchcode, Password: this.ruleForm.password, CaptchaKey: localStorage.getItem('ebd-capt-uuid') }).then(
                 async res => {
-                    if (!res) return;
-
+                    if (!res) {
+                        setTimeout(() => {
+                        this.isLoading=false;
+                       },2000);
+                       return;
+                    }
                     if (res.success) {
                         this.$Message({
                             message: '登录成功',
