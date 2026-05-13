@@ -4,6 +4,8 @@
       <a class="document-btn" target="_blank" href="https://blog.csdn.net/weixin_43239880/article/details/130841067">nginx配置详解</a>
       <a class="document-btn" target="_blank" href="https://blog.csdn.net/weixin_42684368/article/details/136449419">minio分布式存储系统</a>
       <a class="document-btn" target="_blank" href="https://easycaching.readthedocs.io/en/latest/Redis/">分布式缓存</a>
+      <a class="document-btn" target="_blank" href="/聚合API.js">聚合API接口</a>
+       <a class="document-btn" target="_blank" href="/源直链(支持在线导入).txt">音乐js</a>
     </div>
   </template>
   
